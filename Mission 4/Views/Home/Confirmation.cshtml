@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "New Movie Added";
+}
+
+@model Mission_4.Models.AddResponse
+
+@if (Model.Rating == "R")
+{
+    <h2>"@Model.Title" is too hardcore for this collection! </h2>
+    <p>Try adding a G, PG, or PG-13 movie instead</p>
+}
+else
+{
+    <h2>"@Model.Title" was added Successfully. Thank you</h2>
+}
