@@ -8,7 +8,7 @@ using Mission_4.Models;
 namespace Mission_4.Migrations
 {
     [DbContext(typeof(MoviesContext))]
-    [Migration("20220127023319_Initial")]
+    [Migration("20220203033119_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,8 @@ namespace Mission_4.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -54,13 +53,15 @@ namespace Mission_4.Migrations
 
                     b.HasKey("MovieID");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("Responses");
 
                     b.HasData(
                         new
                         {
                             MovieID = 1,
-                            Category = "Comedy",
+                            CategoryID = 1,
                             Director = "Akiva Schaffer",
                             Edited = false,
                             LentTo = "",
@@ -72,7 +73,7 @@ namespace Mission_4.Migrations
                         new
                         {
                             MovieID = 2,
-                            Category = "Comedy, Indie film",
+                            CategoryID = 1,
                             Director = "Jared Hess",
                             Edited = false,
                             LentTo = "",
@@ -84,7 +85,7 @@ namespace Mission_4.Migrations
                         new
                         {
                             MovieID = 3,
-                            Category = "Family, Comedy",
+                            CategoryID = 1,
                             Director = "Byron Howard, Rich Moore",
                             Edited = false,
                             LentTo = "",
@@ -93,6 +94,76 @@ namespace Mission_4.Migrations
                             Title = "Zootopia",
                             Year = (ushort)2016
                         });
+                });
+
+            modelBuilder.Entity("Mission_4.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Action"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Fantasy"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryName = "Horror"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
+                            CategoryName = "Mystery"
+                        },
+                        new
+                        {
+                            CategoryID = 7,
+                            CategoryName = "Romance"
+                        },
+                        new
+                        {
+                            CategoryID = 8,
+                            CategoryName = "Thriller"
+                        },
+                        new
+                        {
+                            CategoryID = 9,
+                            CategoryName = "Western"
+                        });
+                });
+
+            modelBuilder.Entity("Mission_4.Models.AddResponse", b =>
+                {
+                    b.HasOne("Mission_4.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

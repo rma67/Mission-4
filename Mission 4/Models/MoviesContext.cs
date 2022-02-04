@@ -15,14 +15,27 @@ namespace Mission_4.Models
         }
 
         public DbSet<AddResponse> Responses { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+            mb.Entity<Category>().HasData(
+                new Category { CategoryID = 1, CategoryName = "Comedy" },
+                new Category { CategoryID = 2, CategoryName = "Action" },
+                new Category { CategoryID = 3, CategoryName = "Drama" },
+                new Category { CategoryID = 4, CategoryName = "Fantasy" },
+                new Category { CategoryID = 5, CategoryName = "Horror" },
+                new Category { CategoryID = 6, CategoryName = "Mystery" },
+                new Category { CategoryID = 7, CategoryName = "Romance" },
+                new Category { CategoryID = 8, CategoryName = "Thriller" },
+                new Category { CategoryID = 9, CategoryName = "Western" }
+            );
+
             mb.Entity<AddResponse>().HasData(
                 new AddResponse
                 {
                     MovieID = 1,
-                    Category = "Comedy",
+                    CategoryID = 1,
                     Title = "Hot Rod",
                     Year = 2007,
                     Director = "Akiva Schaffer",
@@ -34,7 +47,7 @@ namespace Mission_4.Models
                 new AddResponse
                 {
                     MovieID = 2,
-                    Category = "Comedy, Indie film",
+                    CategoryID = 1,
                     Title = "Napoleon Dynamite",
                     Year = 2004,
                     Director = "Jared Hess",
@@ -46,7 +59,7 @@ namespace Mission_4.Models
                 new AddResponse
                 {
                     MovieID = 3,
-                    Category = "Family, Comedy",
+                    CategoryID = 1,
                     Title = "Zootopia",
                     Year = 2016,
                     Director = "Byron Howard, Rich Moore",

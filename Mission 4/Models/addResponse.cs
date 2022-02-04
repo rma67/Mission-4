@@ -11,20 +11,22 @@ namespace Mission_4.Models
         [Key]
         [Required]
         public int MovieID { get; set; }
-        [Required]
-        public string Category { get; set; }
-        [Required]
+        [Required(ErrorMessage = "A Title is Required")]
         public string Title { get; set; }
-        [Required]
+        [Required(ErrorMessage = "A Year is Required")]
         public ushort Year { get; set; }
-        [Required]
+        [Required(ErrorMessage = "A Director is Required")]
         public string Director { get; set; }
-        [Required]
+        [Required(ErrorMessage = "A Rating is Required")]
         public string Rating { get; set; }
-        [Required]
         public bool Edited { get; set; }
         public string LentTo { get; set; }
         [StringLength(25)]
         public string Notes { get; set; }
+
+        [Required(ErrorMessage = "A Category is Required")]
+        public int CategoryID { get; set; }
+        public Category Category { get; set; }
+
     }
 }
